@@ -11,7 +11,5 @@ $registryOffice = new RegistryOffice();
 $registryOffice->marry($klaus, $maria);
 
 $hr = new Hr($klaus);
-$hr2 = new Hr($maria);
 
 $maria->getFamily()->changeFamilyPhone($maria, '11111');
-$klaus->getFamily()->changeFamilyPhone($klaus, '11111555');

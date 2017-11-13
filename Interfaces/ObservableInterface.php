@@ -9,6 +9,9 @@
 require_once("./Interfaces/ObserverInterface.php");
 require_once("./Classes/Human.php");
 
+/**
+ * Interface ObservableInterface
+ */
 interface ObservableInterface
 {
 

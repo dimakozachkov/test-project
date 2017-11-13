@@ -9,32 +9,63 @@
 require_once("./Classes/Human.php");
 require_once("./Interfaces/WorkInterface.php");
 
+/**
+ * Class Hr
+ */
 class Hr implements WorkInterface
 {
 
+    /**
+     * Worker
+     * @var Human|null
+     */
     private $worker = null;
 
-    public function __construct(Human &$worker) {
+    /**
+     * Hr constructor.
+     * @param Human $worker
+     */
+    public function __construct(Human &$worker)
+    {
         $this->worker = $worker;
         $worker->setWork($this);
     }
 
-    public function setWorker(Human $worker) {
+    /**
+     * Set a worker to Hr
+     * @param Human $worker
+     */
+    public function setWorker(Human $worker)
+    {
         $this->worker = $worker;
     }
 
-    public function hasWorker(): bool {
+    /**
+     * Is there an employee
+     * @return bool
+     */
+    public function hasWorker(): bool
+    {
         return isset($this->worker);
     }
 
-    public function getWorker(): Human {
+    /**
+     * Return an employee
+     * @return Human
+     */
+    public function getWorker(): Human
+    {
         if ($this->hasWorker()) {
             return $this->worker;
         }
-        
+
         return null;
     }
 
+    /**
+     * Advert a message
+     * @param string $message
+     */
     public function advert(string $message)
     {
         try {

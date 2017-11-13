@@ -9,10 +9,20 @@
 require_once("./Classes/Human.php");
 require_once("./Classes/Phone.php");
 
+require_once("./Interfaces/ObserverInterface.php");
+
+/**
+ * Class FamilyObserver
+ */
 class FamilyObserver implements ObserverInterface
 {
 
-    private function sendMessageToWork(Human &$person) {
+    /**
+     * Send message to work of a person
+     * @param Human $person
+     */
+    private function sendMessageToWork(Human &$person)
+    {
         if ($person->hasWork()) {
             $phone = $person->getFamily()->getPhone();
 
@@ -23,15 +33,20 @@ class FamilyObserver implements ObserverInterface
         }
     }
 
-    function handle(Human $person) {
+    /**
+     * Handle the observer
+     * @param Human $person
+     */
+    function handle(Human $person)
+    {
         $family = $person->getFamily();
 
         $this->sendMessageToWork($person);
 
         $personSpouse =
             $family->personIsHusband($person)
-            ? $family->getWife()
-            : $family->getHusband();
+                ? $family->getWife()
+                : $family->getHusband();
 
         $this->sendMessageToWork($personSpouse);
     }

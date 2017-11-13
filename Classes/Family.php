@@ -11,13 +11,22 @@ require_once("./Classes/Phone.php");
 
 require_once("./Classes/Abstract/FamilyAbstract.php");
 
+/**
+ * Class Family
+ */
 class Family extends FamilyAbstract
 {
-
-    private $familyMembers = [];
-
+    /**
+     * Family phone
+     * @var null|Phone
+     */
     private $phone = null;
 
+    /**
+     * Family constructor.
+     * @param Human $husband
+     * @param Human $wife
+     */
     public function __construct(Human $husband, Human $wife)
     {
         $this->familyMembers['husband'] = $husband;
@@ -26,34 +35,24 @@ class Family extends FamilyAbstract
         $this->phone = new Phone();
     }
 
-    public function getPhone(): string {
+    /**
+     * Get a family phone number
+     * @return string
+     */
+    public function getPhone(): string
+    {
         return $this->phone->getNumber();
     }
 
-    public function changeFamilyPhone(Human $person, string $number)
+    /**
+     * Change a family phone number
+     * @param Human $person
+     * @param string $number
+     */
+    public function changeFamilyPhone(Human $person, string $number): void
     {
         $this->phone->setNumber($number);
         $this->notify($person);
-    }
-
-    public function getHusband(): Human
-    {
-        return $this->familyMembers['husband'];
-    }
-
-    public function getWife(): Human
-    {
-        return $this->familyMembers['wife'];
-    }
-
-    public function personIsHusband(Human $person): bool
-    {
-        return $this->familyMembers['husband'] == $person;
-    }
-
-    public function personIsWife(Human $person): bool
-    {
-        return $this->familyMembers['wife'] == $person;
     }
 
 }

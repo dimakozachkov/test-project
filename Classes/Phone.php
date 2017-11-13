@@ -6,21 +6,40 @@
  * Time: 3:09
  */
 
+/**
+ * Class Phone
+ */
 class Phone
 {
     /**
-     * Number of phone
+     * Number of the phone
      * @var string
      */
     private $number;
+
+    /**
+     * Phone constructor.
+     */
     public function __construct()
     {
         $this->number = '+00000';
     }
-    public function getNumber(): string {
+
+    /**
+     * Get the phone number
+     * @return string
+     */
+    public function getNumber(): string
+    {
         return $this->number;
     }
-    public function setNumber(string $number) {
+
+    /**
+     * Set number to the phone
+     * @param string $number
+     */
+    public function setNumber(string $number)
+    {
         $this->number = "+$number";
     }
 }

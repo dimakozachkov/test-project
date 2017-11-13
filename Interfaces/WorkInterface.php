@@ -12,8 +12,11 @@ interface WorkInterface
 {
 
     function setWorker(Human $worker);
+
     function hasWorker(): bool;
+
     function getWorker(): Human;
+
     function advert(string $message);
 
 }

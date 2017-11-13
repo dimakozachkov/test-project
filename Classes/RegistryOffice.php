@@ -10,24 +10,28 @@ require_once("./Classes/Human.php");
 require_once("./Classes/Family.php");
 require_once("./Classes/FamilyObserver.php");
 
+/**
+ * Class RegistryOffice
+ */
 class RegistryOffice
 {
     /**
+     * Marry two person
      * @param Human $husband
      * @param Human $wife
      */
-    public function marry(Human &$husband, Human &$wife) {
+    public function marry(Human &$husband, Human &$wife)
+    {
         try {
             if ($husband->hasFamily() || $wife->hasFamily()) {
                 throw new Exception('Somebody is married');
             }
 
             $family = new Family($husband, $wife);
+            $family->attach(new FamilyObserver());
 
             $husband->setFamily($family);
             $wife->setFamily($family);
-
-            $family->attach(new FamilyObserver());
 
             echo "{$husband->getName()} and {$wife->getName()} is married!<br>";
 
