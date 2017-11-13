@@ -9,7 +9,9 @@
 require_once("./Classes/Human.php");
 require_once("./Classes/Phone.php");
 
-class Family
+require_once("./Classes/Abstract/FamilyAbstract.php");
+
+class Family extends FamilyAbstract
 {
 
     private $familyMembers = [];
@@ -24,25 +26,14 @@ class Family
         $this->phone = new Phone();
     }
 
+    public function getPhone(): string {
+        return $this->phone->getNumber();
+    }
+
     public function changeFamilyPhone(Human $person, string $number)
     {
-        $personFamily = $person->getFamily();
-
-        if ($personFamily->personIsWife($person)) {
-            $personHusband = $personFamily->getHusband();
-
-            if ($personHusband->hasWork()) {
-                $this->phone->setNumber($number);
-                $personHusband->getWork()->advert("{$person->getName()} changed family phone($number)");
-            }
-        } else {
-            $personWife = $personFamily->getWife();
-
-            if ($personWife->hasWork()) {
-                $this->phone->setNumber($number);
-                $personWife->getWork()->advert("{$person->getName()} changed family phone($number)");
-            }
-        }
+        $this->phone->setNumber($number);
+        $this->notify($person);
     }
 
     public function getHusband(): Human

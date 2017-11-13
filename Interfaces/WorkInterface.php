@@ -8,7 +8,7 @@
 
 require_once("./Classes/Human.php");
 
-interface Work
+interface WorkInterface
 {
 
     function setWorker(Human $worker);

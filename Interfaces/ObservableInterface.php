@@ -7,6 +7,7 @@
  */
 
 require_once("./Interfaces/ObserverInterface.php");
+require_once("./Classes/Human.php");
 
 interface ObservableInterface
 {
@@ -15,6 +16,6 @@ interface ObservableInterface
 
     function detach(ObserverInterface $observer);
 
-    function notify();
+    function notify(Human $person);
 
 }

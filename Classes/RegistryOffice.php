@@ -8,6 +8,7 @@
 
 require_once("./Classes/Human.php");
 require_once("./Classes/Family.php");
+require_once("./Classes/FamilyObserver.php");
 
 class RegistryOffice
 {
@@ -25,6 +26,8 @@ class RegistryOffice
 
             $husband->setFamily($family);
             $wife->setFamily($family);
+
+            $family->attach(new FamilyObserver());
 
             echo "{$husband->getName()} and {$wife->getName()} is married!<br>";
 

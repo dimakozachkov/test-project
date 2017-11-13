@@ -6,11 +6,11 @@
  * Time: 2:39
  */
 
-require_once("./Interfaces/ObservableInterface.php");
+require_once("./Classes/Human.php");
 
 interface ObserverInterface
 {
 
-    function handle(ObservableInterface $observable);
+    function handle(Human $person);
 
 }

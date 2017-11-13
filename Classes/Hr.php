@@ -7,9 +7,9 @@
  */
 
 require_once("./Classes/Human.php");
-require_once("./Interfaces/Work.php");
+require_once("./Interfaces/WorkInterface.php");
 
-class Hr implements Work
+class Hr implements WorkInterface
 {
 
     private $worker = null;

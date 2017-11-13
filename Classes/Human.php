@@ -43,7 +43,7 @@ class Human
         $this->family = $family;
     }
 
-    public function setWork(Work &$work)
+    public function setWork(WorkInterface &$work)
     {
         $this->work = $work;
     }
@@ -53,7 +53,7 @@ class Human
         return isset($this->work);
     }
 
-    public function getWork(): Work
+    public function getWork(): WorkInterface
     {
         if ($this->hasWork()) {
             return $this->work;
@@ -61,7 +61,5 @@ class Human
 
         return null;
     }
-    
-    
 
 }
