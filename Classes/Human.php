@@ -7,29 +7,26 @@
  */
 
 require_once("./Classes/Family.php");
+require_once("./Classes/Phone.php");
+require_once("./Classes/HumanObserver.php");
+
+require_once("./Classes/Abstract/HumanAbstract.php");
 
 /**
  * Class Human
  */
-class Human
+class Human extends HumanAbstract
 {
-    /**
-     * Name of the person
-     * @var null|string
-     */
-    private $name = null;
 
-    /**
-     * Family of the person
-     * @var null|Family
-     */
-    private $family = null;
+    const CHANGE_PHONE_EVENT = 'OnChangePhoneEvent';
 
     /**
      * Work of the person
      * @var null|Work
      */
     private $work = null;
+
+    private $phone = null;
 
     /**
      * Human constructor.
@@ -38,46 +35,8 @@ class Human
     public function __construct(string $name)
     {
         $this->name = $name;
-    }
-
-    /**
-     * Get the user name
-     * @return null|string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Is there a family
-     * @return bool
-     */
-    public function hasFamily(): bool
-    {
-        return isset($this->family);
-    }
-
-    /**
-     * Get a family of the person
-     * @return Family
-     */
-    public function getFamily(): Family
-    {
-        if ($this->hasFamily()) {
-            return $this->family;
-        }
-
-        return null;
-    }
-
-    /**
-     * Set a family to the person
-     * @param Family $family
-     */
-    public function setFamily(Family &$family)
-    {
-        $this->family = $family;
+        $this->phone = new Phone();
+        $this->observers[] = new HumanObserver();
     }
 
     /**
@@ -110,5 +69,17 @@ class Human
 
         return null;
     }
+
+    public function getPhone(): string
+    {
+        return $this->phone->getNumber();
+    }
+
+    public function changePhone(string $number): void
+    {
+        $this->phone->setNumber($number);
+        $this->notify($this, self::CHANGE_PHONE_EVENT);
+    }
+
 
 }

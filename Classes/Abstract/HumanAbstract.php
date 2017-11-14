@@ -12,8 +12,20 @@ require_once("./Classes/Human.php");
 /**
  * Class FamilyAbstract
  */
-abstract class FamilyAbstract implements ObservableInterface
+abstract class HumanAbstract implements ObservableInterface
 {
+
+    /**
+     * Name of the person
+     * @var null|string
+     */
+    protected $name = null;
+
+    /**
+     * Family of the person
+     * @var null|Family
+     */
+    protected $family = null;
 
     /**
      * Observers array
@@ -22,47 +34,43 @@ abstract class FamilyAbstract implements ObservableInterface
     protected $observers = [];
 
     /**
-     * Family members
-     * @var array
+     * Get the user name
+     * @return null|string
      */
-    protected $familyMembers = [];
-
-    /**
-     * Return a husband of a family
-     * @return Human
-     */
-    public function getHusband(): Human
+    public function getName()
     {
-        return $this->familyMembers['husband'];
+        return $this->name;
     }
 
     /**
-     * Return a wife of a family
-     * @return Human
-     */
-    public function getWife(): Human
-    {
-        return $this->familyMembers['wife'];
-    }
-
-    /**
-     * Is this person the husband?
-     * @param Human $person
+     * Is there a family
      * @return bool
      */
-    public function personIsHusband(Human $person): bool
+    public function hasFamily(): bool
     {
-        return $this->familyMembers['husband'] == $person;
+        return isset($this->family);
     }
 
     /**
-     * Is this person the wife?
-     * @param Human $person
-     * @return bool
+     * Get a family of the person
+     * @return Family
      */
-    public function personIsWife(Human $person): bool
+    public function getFamily(): Family
     {
-        return $this->familyMembers['wife'] == $person;
+        if ($this->hasFamily()) {
+            return $this->family;
+        }
+
+        return null;
+    }
+
+    /**
+     * Set a family to the person
+     * @param Family $family
+     */
+    public function setFamily(Family &$family)
+    {
+        $this->family = $family;
     }
 
     /**

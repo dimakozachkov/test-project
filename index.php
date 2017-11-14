@@ -12,4 +12,4 @@ $registryOffice->marry($klaus, $maria);
 
 $hr = new Hr($klaus);
 
-$maria->getFamily()->changeFamilyPhone($maria, '11111');
+$maria->changePhone('11111');

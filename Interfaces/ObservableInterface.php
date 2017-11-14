@@ -19,6 +19,6 @@ interface ObservableInterface
 
     function detach(ObserverInterface $observer);
 
-    function notify(Human $person);
+    function notify(Human $person, string $message = '');
 
 }

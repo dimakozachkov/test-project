@@ -11,6 +11,6 @@ require_once("./Classes/Human.php");
 interface ObserverInterface
 {
 
-    function handle(Human $person);
+    function handle(Human $person, $message = '');
 
 }

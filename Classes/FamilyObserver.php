@@ -24,31 +24,53 @@ class FamilyObserver implements ObserverInterface
     private function sendMessageToWork(Human &$person)
     {
         if ($person->hasWork()) {
-            $phone = $person->getFamily()->getPhone();
+            $phone = $person->getPhone();
 
             $person->getWork()
                 ->advert(
-                    "{$person->getName()}: new family phone is $phone"
+                    "{$person->getName()}: new phone is $phone"
                 );
         }
     }
 
-    /**
-     * Handle the observer
-     * @param Human $person
-     */
-    function handle(Human $person)
+    private function sendMessageToSpouseWork(Human &$person, Human &$spouse)
     {
-        $family = $person->getFamily();
+        if ($spouse->hasWork()) {
+            $phone = $person->getPhone();
 
+
+
+            $spouse->getWork()
+                ->advert(
+                    "{$spouse->getName()}: new spouse phone is $phone"
+                );
+        }
+    }
+
+    private function changePhoneEvent(Human &$person)
+    {
         $this->sendMessageToWork($person);
+
+        $family = $person->getFamily();
 
         $personSpouse =
             $family->personIsHusband($person)
                 ? $family->getWife()
                 : $family->getHusband();
 
-        $this->sendMessageToWork($personSpouse);
+        $this->sendMessageToSpouseWork($person, $personSpouse);
+    }
+
+    /**
+     * Handle the observer
+     * @param Human $person
+     * @param string $message
+     */
+    function handle(Human $person, $message = '')
+    {
+        if ($message == 'OnChangePhoneEvent') {
+            $this->changePhoneEvent($person);
+        }
     }
 
 }

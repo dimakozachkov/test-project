@@ -16,11 +16,7 @@ require_once("./Classes/Abstract/FamilyAbstract.php");
  */
 class Family extends FamilyAbstract
 {
-    /**
-     * Family phone
-     * @var null|Phone
-     */
-    private $phone = null;
+    const CHANGE_PHONE_EVENT = 'OnChangePhoneEvent';
 
     /**
      * Family constructor.
@@ -32,27 +28,6 @@ class Family extends FamilyAbstract
         $this->familyMembers['husband'] = $husband;
         $this->familyMembers['wife'] = $wife;
 
-        $this->phone = new Phone();
-    }
-
-    /**
-     * Get a family phone number
-     * @return string
-     */
-    public function getPhone(): string
-    {
-        return $this->phone->getNumber();
-    }
-
-    /**
-     * Change a family phone number
-     * @param Human $person
-     * @param string $number
-     */
-    public function changeFamilyPhone(Human $person, string $number): void
-    {
-        $this->phone->setNumber($number);
-        $this->notify($person);
     }
 
 }
